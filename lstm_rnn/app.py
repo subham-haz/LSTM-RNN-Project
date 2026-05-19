@@ -2,14 +2,16 @@
 import streamlit as st
 import numpy as np
 import pickle
+from pathlib import Path
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 #2 Load the model
-model=load_model('next_word_lstm.h5')
+APP_DIR = Path(__file__).resolve().parent
+model=load_model(APP_DIR / 'next_word_lstm.h5')
 
 #3 Load the tokenizer
-with open('tokenizer.pickle','rb') as handle:
+with open(APP_DIR / 'tokenizer.pickle','rb') as handle:
     tokenizer = pickle.load(handle)
 
 #4 Function to predict the next word
